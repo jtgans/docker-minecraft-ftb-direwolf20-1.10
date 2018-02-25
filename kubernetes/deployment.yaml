@@ -1,0 +1,61 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: direwolf20
+  namespace: direwolf20
+  labels:
+    app: minecraft
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: minecraft
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: minecraft
+          image: jtgans/minecraft-ftb-direwolf20-1.12
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: RCON_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: minecraft-rcon-password
+                  key: password
+          volumeMounts:
+            - mountPath: /data
+              name: minecraft-data
+            - mountPath: /data
+              name: server-properties
+          resources:
+            requests:
+              memory: 4Gi
+          ports:
+            - containerPort: 25565
+          readinessProbe:
+            tcpSocket:
+              port: 25565
+            initialDelaySeconds: 900
+            periodSeconds: 30
+            successThreshold: 3
+            failureThreshold: 3
+          livenessProbe:
+            tcpSocket:
+              port: 25565
+            timeoutSeconds: 30
+            periodSeconds: 60
+            successThreshold: 1
+            failureThreshold: 3
+            initialDelaySeconds: 900
+      volumes:
+        - name: minecraft-data
+          persistentVolumeClaim:
+            claimName: minecraft-data
+        - name: server-properties
+          configMap:
+            name: minecraft-server-properties
+            items:
+              - key: server.properties
+                path: server.properties

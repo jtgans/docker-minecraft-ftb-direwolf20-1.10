@@ -1,0 +1,37 @@
+---
+apiVersion: v1
+data:
+  server.properties: |
+    worldtype=lostcities
+    generator-settings={"profile":"rarecities"}
+    allow-nether=true
+    level-name=world
+    enable-query=false
+    allow-flight=true
+    server-port=25565
+    level-type=DEFAULT
+    enable-rcon=false
+    level-seed=
+    force-gamemode=false
+    server-ip=
+    max-build-height=256
+    spawn-npcs=true
+    white-list=false
+    spawn-animals=true
+    snooper-enabled=false
+    hardcore=false
+    texture-pack=
+    online-mode=true
+    pvp=true
+    difficulty=1
+    gamemode=0
+    player-idle-timeout=0
+    max-players=20
+    spawn-monsters=true
+    generate-structures=true
+    view-distance=10
+    motd=FTB direwolf20 1.12 Minecraft Server
+kind: ConfigMap
+metadata:
+  name: minecraft-server-properties
+  namespace: direwolf20
