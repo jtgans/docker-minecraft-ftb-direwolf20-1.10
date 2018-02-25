@@ -16,7 +16,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: minecraft
-          image: jtgans/minecraft-ftb-direwolf20-1.12
+          image: jtgans/minecraft-ftb-direwolf20-1.12:devel
           imagePullPolicy: IfNotPresent
           env:
             - name: RCON_PASSWORD
@@ -24,16 +24,20 @@ spec:
                 secretKeyRef:
                   name: minecraft-rcon-password
                   key: password
+                  optional: true
           volumeMounts:
             - mountPath: /data
               name: minecraft-data
-            - mountPath: /data
+            - mountPath: /properties
               name: server-properties
           resources:
             requests:
               memory: 4Gi
           ports:
             - containerPort: 25565
+              name: minecraft
+            - containerPort: 25575
+              name: rcon
           readinessProbe:
             tcpSocket:
               port: 25565

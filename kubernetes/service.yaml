@@ -8,6 +8,14 @@ spec:
   ports:
     - port: 25565
       targetPort: 25565
+      nodePort: 32565
       protocol: TCP
+      name: minecraft
+    - port: 25575
+      targetPort: 25575
+      nodePort: 32575
+      protocol: TCP
+      name: rcon
   selector:
     app: minecraft
+  type: NodePort
