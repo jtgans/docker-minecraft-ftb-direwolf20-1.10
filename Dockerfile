@@ -16,7 +16,7 @@ RUN mkdir /tmp/feed-the-beast && cd /tmp/feed-the-beast && \
 	chown -R minecraft /tmp/feed-the-beast
 
 USER minecraft
-EXPOSE 25565
+EXPOSE 25565 25575
 ADD start.sh /start
 
 VOLUME /data
