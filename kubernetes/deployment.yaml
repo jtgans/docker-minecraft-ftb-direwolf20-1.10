@@ -16,7 +16,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: minecraft
-          image: jtgans/minecraft-ftb-direwolf20-1.12:devel
+          image: jtgans/minecraft-ftb-direwolf20-1.12
           imagePullPolicy: IfNotPresent
           env:
             - name: RCON_PASSWORD
