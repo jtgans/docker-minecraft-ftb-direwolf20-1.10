@@ -1,4 +1,4 @@
-docker-minecraft-ftb-direwolf20-1.10
+docker-minecraft-ftb-direwolf20-1.12
 ===============
 
 This docker image provides a Minecraft Server, based on the direwolf20 1.12 Feed
